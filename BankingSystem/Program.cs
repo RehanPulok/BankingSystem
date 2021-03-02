@@ -13,10 +13,6 @@ namespace BankingSystem
         {
             bool menu = true;
             int number = 1;
-            Account account = new Account("Pulok", 200.5);
-            Account account1 = new Account("Rehan",500.5);
-            Console.WriteLine(account.AccountNumber);
-            Console.WriteLine(account1.AccountNumber);
             while ( menu==true )
             {
                 Console.WriteLine("What do you want to do?");
@@ -32,18 +28,23 @@ namespace BankingSystem
                     if (choosenOption == 1)
                     {
                         
-                        Console.WriteLine("0");
+                        Bank bank= new Bank();
+                        bank.addAccount();
 
 
                     }
                     if (choosenOption == 2)
                     {
-                         Console.WriteLine("0");
+                        Console.Write("Enter your account number: ");
+                        string user = Console.ReadLine();
+
+
 
                     }
                     if (choosenOption == 3)
                     {
-                         Console.WriteLine("0");
+                        Console.Write("Enter your account number: ");
+                        string user = Console.ReadLine();
 
                     }
                     if (choosenOption == 4)
@@ -62,6 +63,9 @@ namespace BankingSystem
                         menu =false;
                        
 
+                    }
+                    else{
+                        Console.WriteLine("Please enter a valid Number");
                     }
                     
 
