@@ -17,48 +17,46 @@ namespace BankingSystem
             {
                 Console.WriteLine("What do you want to do?");
                 Console.WriteLine("1. Create Account");
-                Console.WriteLine("2. Withdraw money");
-                Console.WriteLine("3. Deposit Money");
-                Console.WriteLine("4. Transfer Money");
-                Console.WriteLine("5. Account Information");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("2. Delete Account");
+                Console.WriteLine("3. Transaction");
+                Console.WriteLine("4. Account Information");
+                Console.WriteLine("5. Exit");
                 try
                 {
                     int choosenOption = Convert.ToInt32(Console.ReadLine());
+                    Bank bank= new Bank();
                     if (choosenOption == 1)
                     {
+                        //IdGenerator id = new IdGenerator();
                         
-                        Bank bank= new Bank();
+                        
                         bank.addAccount();
 
 
                     }
+                    
                     if (choosenOption == 2)
                     {
-                        Console.Write("Enter your account number: ");
-                        string user = Console.ReadLine();
+                        Console.Write("Enter your account number you want to delete: ");
+                        string userAccountNumber = Console.ReadLine();
+                        Console.WriteLine("0");
 
 
-
-                    }
+}
                     if (choosenOption == 3)
                     {
-                        Console.Write("Enter your account number: ");
-                        string user = Console.ReadLine();
+                        bank.transaction();
+                       
 
                     }
                     if (choosenOption == 4)
                     {
-                        Console.WriteLine("0");
+                        Console.Write("Enter your account number: ");
+                        string userAccountNumber = Console.ReadLine();
+                        bank.accountInformation(userAccountNumber);
 
-}
+                    }
                     if (choosenOption == 5)
-                    {
-                        Console.WriteLine("0");
-
-
-}
-                    if (choosenOption == 6)
                     {
                         menu =false;
                        

@@ -1,12 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class IdGenerator
+
+namespace BankingSystem
 {
-	public int id = 100;
 
-	public IdGenerator()
+	public class IdGenerator
 	{
-		id = id + 1;
-		return id;
+		public int id = 1000;
+		int count = 0;
+
+		public IdGenerator()
+		{
+			id = id + count;
+			count+=1;
+			return id;
+		}
 	}
 }
