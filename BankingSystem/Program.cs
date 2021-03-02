@@ -12,6 +12,11 @@ namespace BankingSystem
         static void Main(string[] args)
         {
             bool menu = true;
+            int number = 1;
+            Account account = new Account("Pulok", 200.5);
+            Account account1 = new Account("Rehan",500.5);
+            Console.WriteLine(account.AccountNumber);
+            Console.WriteLine(account1.AccountNumber);
             while ( menu==true )
             {
                 Console.WriteLine("What do you want to do?");
@@ -26,6 +31,7 @@ namespace BankingSystem
                     int choosenOption = Convert.ToInt32(Console.ReadLine());
                     if (choosenOption == 1)
                     {
+                        
                         Console.WriteLine("0");
 
 
@@ -60,9 +66,10 @@ namespace BankingSystem
                     
 
                 }
-                catch(Exception ex)
+                catch(Exception e)
                 {
-                    Console.WriteLine("Please Choose a valid option");
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Please enter a valid number");
                     menu = true;
                     Console.ReadLine();
                 }

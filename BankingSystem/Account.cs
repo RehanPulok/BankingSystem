@@ -33,7 +33,7 @@ namespace BankingSystem
         {
             this.accountName = accountName;
             this.balance = balance;
-            this.accountNumber++;
+            this.accountNumber=this.accountNumber+1;
          
 
         }
