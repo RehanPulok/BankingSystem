@@ -62,14 +62,14 @@ namespace BankingSystem
          
 
         }
-        public void withdraw(double amount)
+        public void Withdraw(double amount)
         {
            
             if(balance>=amount)
                 {
                 this.balance= this.balance-amount;
                 Console.WriteLine("You have withdrawn {0} TK", amount);
-                Console.WriteLine("Your current balance is:  ",this.balance );
+               // Console.WriteLine("Your current balance is:  ",this.balance );
             }
             else
             {
@@ -78,14 +78,14 @@ namespace BankingSystem
             
 
         }
-        public void deposit(double amount)
+        public void Deposit(double amount)
         {
                    
             this.balance= this.balance+ amount;
             Console.WriteLine("You deposited {0} Tk",amount);
-            Console.WriteLine("Your current balance : ",this.balance);
+            //Console.WriteLine("Your current balance : ",this.balance);
         }
-        public void transfer(Account receiver, double amount)
+        public void Transfer(Account receiver, double amount)
         {
             if(amount<=balance)
             {
@@ -105,10 +105,10 @@ namespace BankingSystem
         }
     
 	
-        public void showInformation()
+        public void ShowInformation()
         {
             Console.WriteLine(" Account Name:{0} \n Account Number: {1} \n Ballance: {2} ",accountName,accountNumber, balance);
-            this.address.getAddress();
+            this.address.GetAddress();
         }
     }
 }

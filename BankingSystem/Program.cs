@@ -13,7 +13,7 @@ namespace BankingSystem
         static double userAccountbalance;
         private static int id =1000;
 
-        public static void userAccountDetail()
+        public static void UserAccountDetail()
             {
             Console.Write("Please Enter your name: ");
             userAccountName= Console.ReadLine();
@@ -29,7 +29,7 @@ namespace BankingSystem
             userRoadNo= int.Parse(Console.ReadLine());
             }
         
-            public static int generateId()
+            public static int GenerateId()
             {
 
                 id++;
@@ -63,9 +63,9 @@ namespace BankingSystem
                     //Bank bank= new Bank();
                     if (choosenOption == 1)
                     {
-                        userAccountDetail();
-                        id=generateId();
-                        bank.addAccount(new Account(userAccountName,userAccountbalance,id, new Address(userHouseNo,userRoadNo,userCity,userCountry)));
+                        UserAccountDetail();
+                        id=GenerateId();
+                        bank.AddAccount(new Account(userAccountName,userAccountbalance,id, new Address(userHouseNo,userRoadNo,userCity,userCountry)));
 
             
                     }
@@ -74,7 +74,7 @@ namespace BankingSystem
                     {
                         Console.Write("Enter your account number you want to delete: ");
                         int userAccountNumber =int.Parse( Console.ReadLine());
-                        bank.deleteAccount(userAccountNumber);
+                        bank.DeleteAccount(userAccountNumber);
 
 
                     }
@@ -88,13 +88,13 @@ namespace BankingSystem
                         int option= int.Parse(Console.ReadLine());
                         Console.Write("Enter your account number: ");
                         int  userAccountNumber = int.Parse(Console.ReadLine());
-                        bank.transaction(userAccountNumber,option);
+                        bank.Transaction(userAccountNumber,option);
                     }
                     if (choosenOption == 4)
                     {
                         Console.Write("Enter your account number: ");
                         int userAccountNumber = int.Parse(Console.ReadLine());
-                        bank.accountInformation(userAccountNumber);
+                        bank.AccountInformation(userAccountNumber);
 
                     }
                     if (choosenOption == 5)

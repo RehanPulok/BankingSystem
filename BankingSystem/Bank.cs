@@ -29,7 +29,7 @@ namespace BankingSystem
                 this.myBank=new Account[100];
             }
 
-        public void addAccount(Account account)
+        public void AddAccount(Account account)
             {
             /*
             Console.WriteLine("Enter the Name of the account holder: ");
@@ -95,7 +95,7 @@ namespace BankingSystem
               */
         
         }
-        public void deleteAccount(int accountNumber)
+        public void DeleteAccount(int accountNumber)
         {
             for(int i=0; i<myBank.Length; i++)
             {
@@ -113,7 +113,7 @@ namespace BankingSystem
             }
 
         }
-        public void transaction(int accountNumber, int choosenOption)
+        public void Transaction(int accountNumber, int choosenOption)
         {
             
             if (choosenOption == 2)
@@ -126,7 +126,7 @@ namespace BankingSystem
                             {
                             if (myBank[i].AccountNumber==accountNumber)
                             {
-                                myBank[i].withdraw(withdrawMoney);
+                                myBank[i].Withdraw(withdrawMoney);
                                 break;
                             }
                             else
@@ -148,7 +148,7 @@ namespace BankingSystem
                              {
                                   if (myBank[i].AccountNumber==accountNumber)
                                         {
-                                            myBank[i].deposit(depositMoney);
+                                            myBank[i].Deposit(depositMoney);
                                             break;
                                         }
                                   else
@@ -170,7 +170,7 @@ namespace BankingSystem
                              {
                                   if (myBank[i].AccountNumber==accountNumber)
                                         {
-                                            myBank[i].transfer(myBank[i],amount);
+                                            myBank[i].Transfer(myBank[i],amount);
                                             break;
                                         }
                                   else
@@ -185,7 +185,7 @@ namespace BankingSystem
 
 
         }
-        public void accountInformation(int accountNumber)
+        public void AccountInformation(int accountNumber)
         {
             int check = 0;
             for(int i =0; i<myBank.Length; i++)
@@ -196,7 +196,7 @@ namespace BankingSystem
                 }
                 else if(myBank[i].AccountNumber == accountNumber)
                 {
-                    myBank[i].showInformation();
+                    myBank[i].ShowInformation();
                     check = 1;
                     break;
                 }

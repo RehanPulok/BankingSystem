@@ -40,7 +40,7 @@ namespace BankingSystem
             get { return this.country; }
         }
 
-        public void getAddress()
+        public void GetAddress()
         {
             Console.WriteLine("Address:House No-{0},Road No-{1},City-{2}, Country- {3}", this.houseNo, this.roadNo, this.city, this.country);
         }
