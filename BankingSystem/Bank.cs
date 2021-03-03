@@ -113,28 +113,50 @@ namespace BankingSystem
             }
 
         }
-        public void transaction()
+        public void transaction(int accountNumber, int choosenOption)
         {
-            Console.WriteLine("Which type of transaction you want to do? ");
-            Console.WriteLine("1. Transfer Money");
-            Console.WriteLine("2. Withdraw money");
-            Console.WriteLine("3. Deposit Money");
-            int choosenOption= int.Parse(Console.ReadLine());
+            
             if (choosenOption == 2)
                     {
-                        Console.Write("Enter your account number: ");
-                        int  userAccountNumber = int.Parse(Console.ReadLine());
+                        
                         Console.WriteLine("Enter the amount you want to withdraw: ");
-                        double withdrawMoney= int.Parse(Console.ReadLine());
+                        double withdrawMoney= double.Parse(Console.ReadLine());
+               
+                        for (int i =0;i<myBank.Length;i++)
+                            {
+                            if (myBank[i].AccountNumber==accountNumber)
+                            {
+                                myBank[i].withdraw(withdrawMoney);
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid Account Number.");
+                            }
+
+                        }
                         
 
                     }
             if (choosenOption == 3)
                     {
-                        Console.Write("Enter your account number: ");
-                        string userAccountNumber = Console.ReadLine();
+                        //Console.Write("Enter your account number: ");
+                        //int userAccountNumber = int.Parse(Console.ReadLine());
                         Console.WriteLine("Enter the amount you want to deposit: ");
-                        double depositMoney= int.Parse(Console.ReadLine());
+                        double depositMoney= double.Parse(Console.ReadLine());
+                        for (int i =0;i<myBank.Length;i++)
+                             {
+                                  if (myBank[i].AccountNumber==accountNumber)
+                                        {
+                                            myBank[i].deposit(depositMoney);
+                                            break;
+                                        }
+                                  else
+                                        {
+                                            Console.WriteLine("Invalid Account Number.");
+                                        }
+
+                             }
                         
                 }
             
@@ -142,6 +164,21 @@ namespace BankingSystem
                     {
                         Console.WriteLine("Enter the account number you want to transfer credit: ");
                         int transferedAccount= int.Parse(Console.ReadLine());
+                        Console.WriteLine("Enter the amount you want to transfer: ");
+                        double amount= double.Parse(Console.ReadLine());
+                        for (int i =0;i<myBank.Length;i++)
+                             {
+                                  if (myBank[i].AccountNumber==accountNumber)
+                                        {
+                                            myBank[i].transfer(myBank[i],amount);
+                                            break;
+                                        }
+                                  else
+                                        {
+                                            Console.WriteLine("Invalid Account Number.");
+                                        }
+
+                             }
 
 
                 }

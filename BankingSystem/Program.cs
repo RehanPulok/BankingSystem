@@ -17,6 +17,8 @@ namespace BankingSystem
             {
             Console.Write("Please Enter your name: ");
             userAccountName= Console.ReadLine();
+            Console.Write("Enter balace: ");
+            userAccountbalance= double.Parse(Console.ReadLine());
             Console.Write("Enter your Country:  ");
             userCountry= Console.ReadLine();
             Console.Write("Enter your city:  ");
@@ -56,13 +58,14 @@ namespace BankingSystem
                 Console.WriteLine("5. Exit");
                 try
                 {
+                    Console.Write("Enter Your Option: ");
                     int choosenOption = Convert.ToInt32(Console.ReadLine());
                     //Bank bank= new Bank();
                     if (choosenOption == 1)
                     {
                         userAccountDetail();
                         id=generateId();
-                        bank.addAccount(new Account(userAccountName,0.0,id, new Address(userHouseNo,userRoadNo,userCity,userCountry)));
+                        bank.addAccount(new Account(userAccountName,userAccountbalance,id, new Address(userHouseNo,userRoadNo,userCity,userCountry)));
 
             
                     }
@@ -77,9 +80,15 @@ namespace BankingSystem
                     }
                     if (choosenOption == 3)
                     {
-                        bank.transaction();
-                       
-
+                        Console.WriteLine("Which type of transaction you want to do? ");
+                        Console.WriteLine("1. Transfer Money");
+                        Console.WriteLine("2. Withdraw money");
+                        Console.WriteLine("3. Deposit Money");
+                        Console.Write("Enter Your Option: ");
+                        int option= int.Parse(Console.ReadLine());
+                        Console.Write("Enter your account number: ");
+                        int  userAccountNumber = int.Parse(Console.ReadLine());
+                        bank.transaction(userAccountNumber,option);
                     }
                     if (choosenOption == 4)
                     {
