@@ -10,13 +10,12 @@ namespace BankingSystem
 
 	public class IdGenerator
 	{
-		public int id = 1000;
-		int count = 0;
+		private int id = 1000;
+		
 
-		public IdGenerator()
+		public static int IdGenerator()
 		{
-			id = id + count;
-			count+=1;
+			id++;
 			return id;
 		}
 	}

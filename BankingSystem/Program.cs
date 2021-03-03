@@ -8,11 +8,44 @@ namespace BankingSystem
 {
     class Program
     {
+        static int userAcoountNumber,userHouseNo,userRoadNo;
+        static string userAccountName, userCountry, userCity;
+        static double userAccountbalance;
+        private static int id =1000;
+
+        public static void userAccountDetail()
+            {
+            Console.Write("Please Enter your name: ");
+            userAccountName= Console.ReadLine();
+            Console.Write("Enter your Country:  ");
+            userCountry= Console.ReadLine();
+            Console.Write("Enter your city:  ");
+            userCity= Console.ReadLine();
+            Console.Write("Enter your road no:  ");
+            userHouseNo= int.Parse(Console.ReadLine());
+            Console.Write("Enter your house no:  ");
+            userRoadNo= int.Parse(Console.ReadLine());
+            }
+        
+            public static int generateId()
+            {
+
+                id++;
+                return id;
+            }
                
         static void Main(string[] args)
         {
+
             bool menu = true;
-            int number = 1;
+            //int number = 1;
+            Bank bank= new Bank();
+            Console.Write("Bank Name: ");
+            bank.BankName= Console.ReadLine();
+
+            
+            //int count;
+            //public  List<Account> accounts = new List<Account>();
             while ( menu==true )
             {
                 Console.WriteLine("What do you want to do?");
@@ -24,25 +57,24 @@ namespace BankingSystem
                 try
                 {
                     int choosenOption = Convert.ToInt32(Console.ReadLine());
-                    Bank bank= new Bank();
+                    //Bank bank= new Bank();
                     if (choosenOption == 1)
                     {
-                        //IdGenerator id = new IdGenerator();
-                        
-                        
-                        bank.addAccount();
+                        userAccountDetail();
+                        id=generateId();
+                        bank.addAccount(new Account(userAccountName,0.0,id, new Address(userHouseNo,userRoadNo,userCity,userCountry)));
 
-
+            
                     }
                     
                     if (choosenOption == 2)
                     {
                         Console.Write("Enter your account number you want to delete: ");
-                        string userAccountNumber = Console.ReadLine();
-                        Console.WriteLine("0");
+                        int userAccountNumber =int.Parse( Console.ReadLine());
+                        bank.deleteAccount(userAccountNumber);
 
 
-}
+                    }
                     if (choosenOption == 3)
                     {
                         bank.transaction();
@@ -52,7 +84,7 @@ namespace BankingSystem
                     if (choosenOption == 4)
                     {
                         Console.Write("Enter your account number: ");
-                        string userAccountNumber = Console.ReadLine();
+                        int userAccountNumber = int.Parse(Console.ReadLine());
                         bank.accountInformation(userAccountNumber);
 
                     }
@@ -62,9 +94,11 @@ namespace BankingSystem
                        
 
                     }
+                    /*
                     else{
                         Console.WriteLine("Please enter a valid Number");
                     }
+                    */
                     
 
                 }

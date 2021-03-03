@@ -8,10 +8,30 @@ namespace BankingSystem
 {
     class Bank
     {
-        public string bankName;
+        //public string bankName;
+        private Account [] myBank= new Account [100];
+        //int count;
+        private string bankName;
 
-        public void addAccount()
+	public string BankName
+	{
+		get { return bankName;}
+		set { bankName = value;}
+	}
+        public Account[] MyBank
             {
+                get{return this.myBank;}
+            }
+
+        public Bank()
+            {
+                this.bankName= bankName;
+                this.myBank=new Account[100];
+            }
+
+        public void addAccount(Account account)
+            {
+            /*
             Console.WriteLine("Enter the Name of the account holder: ");
             string name= Console.ReadLine();
             Console.WriteLine("Enter your country: ");
@@ -22,18 +42,75 @@ namespace BankingSystem
             int road= int.Parse(Console.ReadLine());
            Console.WriteLine("Enter your house no: ");
             int house= int.Parse(Console.ReadLine());
+            */
+            int index =0;
+            for(int i=0; i<myBank.Length; i++)
+            {
 
-            Address adressOfUser= new Address(house,road,city,country);
+                if(myBank[i] == null)
+                    {
+                        myBank[i] = account;
+                        
+                        index = i;
+                    Console.WriteLine("Account Added.");
+                    Console.WriteLine("Account Number: "+myBank[index].AccountNumber);
+                    Console.WriteLine();
+                        break;
+                    }
+            }
+            /*
+            else
+            {
+            Console.WriteLine("Account Insertion Unsuccessful! Please try again.");
+            Console.WriteLine();
+            }
+            */
+            
+            
+           
+            
+            //Address adressOfUser= new Address(house,road,city,country);
 
+            //Account account= new Account(name, 0.0,adressOfUser);
+            
+            //account.showInformation();
+            /*
+            Account[] accounts = new Account[100];
+             
+            accounts[count]=new Account(name, 0.0,adressOfUser);
+            count=count+1;
+           
+            Account[] accounts = new Account[100];
+            for(int i = 0; i < mybank.length; ++i)
+            {
+                array[i] = new Account();
+            }
+            
             //IdGenerator id = new IdGenerator();
-            Account account1= new Account(name, 0.0,adressOfUser,account1.IdGenerator());
+            Account account1= new Account(name, 0.0,adressOfUser);
             account1.showInformation();
-
+            Account account2= new Account(name, 0.0,adressOfUser);
+          
+            accounts[count].showInformation();
+              */
         
         }
-        public void deleteAccount(string userAccountNumber)
+        public void deleteAccount(int accountNumber)
         {
-            
+            for(int i=0; i<myBank.Length; i++)
+            {
+                if (myBank[i] != null)
+                {
+                    if (myBank[i].AccountNumber == accountNumber)
+                    {
+                        myBank[i] = null;
+                        
+                        Console.WriteLine("Account Deleted");
+                        break;
+                    }
+                }
+                Console.WriteLine("Deletion Unsuccesfull");
+            }
 
         }
         public void transaction()
@@ -46,9 +123,10 @@ namespace BankingSystem
             if (choosenOption == 2)
                     {
                         Console.Write("Enter your account number: ");
-                        string userAccountNumber = Console.ReadLine();
+                        int  userAccountNumber = int.Parse(Console.ReadLine());
                         Console.WriteLine("Enter the amount you want to withdraw: ");
                         double withdrawMoney= int.Parse(Console.ReadLine());
+                        
 
                     }
             if (choosenOption == 3)
@@ -57,6 +135,7 @@ namespace BankingSystem
                         string userAccountNumber = Console.ReadLine();
                         Console.WriteLine("Enter the amount you want to deposit: ");
                         double depositMoney= int.Parse(Console.ReadLine());
+                        
                 }
             
             if (choosenOption == 1)
@@ -69,9 +148,27 @@ namespace BankingSystem
 
 
         }
-        public void accountInformation(string userAccountNumber)
+        public void accountInformation(int accountNumber)
         {
-
+            int check = 0;
+            for(int i =0; i<myBank.Length; i++)
+            {
+                if(myBank[i] ==null)
+                {
+                    continue;
+                }
+                else if(myBank[i].AccountNumber == accountNumber)
+                {
+                    myBank[i].showInformation();
+                    check = 1;
+                    break;
+                }
+            }
+            if(check==0)
+            {
+                Console.WriteLine("Invalid Account");
+            }
         }
     }
 }
+    

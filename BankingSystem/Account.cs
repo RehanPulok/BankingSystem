@@ -8,13 +8,13 @@ namespace BankingSystem
 {
     class Account
     {
-        protected int accountNumber=1000;
+        protected int accountNumber;
         private string accountName;
         private double balance;
-        public Address address;
+        private Address address;
         //public int idobject;
-        public int id = 1000;
-		int count = 0;
+        //public int id = 1000;
+		//int count = 0;
 
         //public int AccountNumber { get; set; } = 1000;
 
@@ -36,16 +36,27 @@ namespace BankingSystem
             set { this.balance = 0; }
             get { return this.balance; }
         }
+        public Address Address
+        {
+            set { this.address = value; }
+            get { return this.address; }
+        }
+        public Account()
+            {
+        }
       
-        public Account(string accountName, double balance, Address adress,int accountNumber)
+        public Account(string accountName, double balance, int accountNumber, Address adress)
         {
             //IdGenerator id = new IdGenerator();
             
             this.accountName = accountName;
             this.balance = balance;
-            this.accountNumber=accountNumber;
+            //id=id+1;
+           // this.accountNumber=id+1;
+            //id=id+1;
             //idobject+=1;
             //AccountNumber= AccountNumber +idobject ;
+            this.accountNumber= accountNumber ;
             this.address=adress
             ;
          
@@ -56,7 +67,9 @@ namespace BankingSystem
            
             if(balance>=amount)
                 {
-                balance= balance-amount;
+                this.balance= this.balance-amount;
+                Console.WriteLine("You have withdrawn {0} TK", amount);
+                Console.WriteLine("Your current balance is:  ",this.balance );
             }
             else
             {
@@ -67,27 +80,35 @@ namespace BankingSystem
         }
         public void deposit(double amount)
         {
-           
-            balance= balance+ amount;
+                   
+            this.balance= this.balance+ amount;
+            Console.WriteLine("You deposited {0} Tk",amount);
+            Console.WriteLine("Your current balance : ",this.balance);
         }
-        public void transfer(int accountNumber, double amount)
+        public void transfer(Account receiver, double amount)
         {
-            Console.WriteLine("Enter you account number: ");
-            int userAccount= int.Parse(Console.ReadLine());
+            if(amount<=balance)
+            {
+            Console.WriteLine("Amount Transferred: "+amount);
+            
+            this.balance -= amount;
+            Console.WriteLine("Current Balance: " + this.balance);
+            receiver.balance += amount;
+            Console.WriteLine();
+            }
+            else
+            {
+            Console.WriteLine("Balance Transfer can not be done! Please Try Again.");
+            }
 
 
         }
-      
-		public int IdGenerator()
-		{
-			id = id + count;
-			count+=1;
-			return id;
-		}
+    
 	
         public void showInformation()
         {
             Console.WriteLine(" Account Name:{0} \n Account Number: {1} \n Ballance: {2} ",accountName,accountNumber, balance);
+            this.address.getAddress();
         }
     }
 }
