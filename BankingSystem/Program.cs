@@ -8,118 +8,195 @@ namespace BankingSystem
 {
     class Program
     {
-        static int userAcoountNumber,userHouseNo,userRoadNo;
-        static string userAccountName, userCountry, userCity;
-        static double userAccountbalance;
-        private static int id =1000;
-
-        public static void UserAccountDetail()
-            {
-            Console.Write("Please Enter your name: ");
-            userAccountName= Console.ReadLine();
-            Console.Write("Enter balace: ");
-            userAccountbalance= double.Parse(Console.ReadLine());
-            Console.Write("Enter your Country:  ");
-            userCountry= Console.ReadLine();
-            Console.Write("Enter your city:  ");
-            userCity= Console.ReadLine();
-            Console.Write("Enter your road no:  ");
-            userHouseNo= int.Parse(Console.ReadLine());
-            Console.Write("Enter your house no:  ");
-            userRoadNo= int.Parse(Console.ReadLine());
-            }
-        
-            public static int GenerateId()
-            {
-
-                id++;
-                return id;
-            }
-               
+        private static int id = 0;
+        public static int AutoGenerateId()
+        {
+            id++;
+            return id;
+        }
         static void Main(string[] args)
         {
 
-            bool menu = true;
-            //int number = 1;
-            Bank bank= new Bank();
-            Console.Write("Bank Name: ");
-            bank.BankName= Console.ReadLine();
+            Console.Write("Enter Bank Name: ");
+            string bankName = Console.ReadLine();
 
-            
-            //int count;
-            //public  List<Account> accounts = new List<Account>();
-            while ( menu==true )
+            Bank b = new Bank(bankName);
+
+            int check = 0;
+            while (true)
             {
-                Console.WriteLine("What do you want to do?");
-                Console.WriteLine("1. Create Account");
-                Console.WriteLine("2. Delete Account");
-                Console.WriteLine("3. Transaction");
-                Console.WriteLine("4. Account Information");
-                Console.WriteLine("5. Exit");
-                try
+                Console.WriteLine("open: Open a Bank Account");
+                Console.WriteLine("account: Perform Transactions");
+                Console.WriteLine("quit: Exit Application");
+
+                Console.Write("Please Type to select an operation: ");
+                string choice = Console.ReadLine().ToLower();
+
+                Console.WriteLine();
+
+                switch (choice)
                 {
-                    Console.Write("Enter Your Option: ");
-                    int choosenOption = Convert.ToInt32(Console.ReadLine());
-                    //Bank bank= new Bank();
-                    if (choosenOption == 1)
-                    {
-                        UserAccountDetail();
-                        id=GenerateId();
-                        bank.AddAccount(new Account(userAccountName,userAccountbalance,id, new Address(userHouseNo,userRoadNo,userCity,userCountry)));
+                    case "open":
+                        int ok = 0;
+                        while (true)
+                        {
+                            Console.WriteLine("savings: Open Savings Account");
+                            Console.WriteLine("checking: Open Checking Account");
+                            Console.WriteLine("quit: Exit");
 
-            
-                    }
-                    
-                    if (choosenOption == 2)
-                    {
-                        Console.Write("Enter your account number you want to delete: ");
-                        int userAccountNumber =int.Parse( Console.ReadLine());
-                        bank.DeleteAccount(userAccountNumber);
+                            Console.Write("Please type to select an operation: ");
+                            string option = Console.ReadLine().ToLower();
+                            Console.WriteLine();
 
+                            switch (option)
+                            {
+                                case "savings":
 
-                    }
-                    if (choosenOption == 3)
-                    {
-                        Console.WriteLine("Which type of transaction you want to do? ");
-                        Console.WriteLine("1. Transfer Money");
-                        Console.WriteLine("2. Withdraw money");
-                        Console.WriteLine("3. Deposit Money");
-                        Console.Write("Enter Your Option: ");
-                        int option= int.Parse(Console.ReadLine());
-                        Console.Write("Enter your account number: ");
-                        int  userAccountNumber = int.Parse(Console.ReadLine());
-                        bank.Transaction(userAccountNumber,option);
-                    }
-                    if (choosenOption == 4)
-                    {
-                        Console.Write("Enter your account number: ");
-                        int userAccountNumber = int.Parse(Console.ReadLine());
-                        bank.AccountInformation(userAccountNumber);
+                                    Console.Write("Account Name: ");
+                                    string accountName = Console.ReadLine();
+                                    Console.Write("Date of Birth: ");
+                                    string dateofBirth = Console.ReadLine();
 
-                    }
-                    if (choosenOption == 5)
-                    {
-                        menu =false;
-                       
+                                    Console.WriteLine("     **Enter Address Details**");
+                                    Console.Write("         3. Road No: ");
+                                    int roadNo = int.Parse(Console.ReadLine());
+                                    Console.Write("         4. House No: ");
+                                    int houseNo = int.Parse(Console.ReadLine());
+                                    Console.Write("         5. City: ");
+                                    string city = Console.ReadLine();
+                                    Console.Write("         6. Country: ");
+                                    string country = Console.ReadLine();
 
-                    }
-                    /*
-                    else{
-                        Console.WriteLine("Please enter a valid Number");
-                    }
-                    */
-                    
+                                    Console.Write("Initial Balance: ");
+                                    double balance = Convert.ToDouble(Console.ReadLine());
 
+                                    int i = AutoGenerateId();
+                                    b.AddAccount(new SavingsAccount(i, accountName, dateofBirth, balance, new Address(roadNo, houseNo, city, country)), option);
+                                    break;
+
+                                case "checking":
+                                    Console.Write("Account Name: ");
+                                    string n = Console.ReadLine();
+                                    Console.Write("Date of Birth: ");
+                                    string dob = Console.ReadLine();
+
+                                    Console.WriteLine("     **Enter Address Details**");
+                                    Console.Write("         3. Road No: ");
+                                    int road = int.Parse(Console.ReadLine());
+                                    Console.Write("         4. House No: ");
+                                    int house = int.Parse(Console.ReadLine());
+                                    Console.Write("         5. City: ");
+                                    string c = Console.ReadLine();
+                                    Console.Write("         6. Country: ");
+                                    string co = Console.ReadLine();
+
+                                    Console.Write("Initial Balance: ");
+                                    double bal = Convert.ToDouble(Console.ReadLine());
+
+                                    int id = AutoGenerateId();
+                                    b.AddAccount(new CheckingAccount(id, n, dob, bal, new Address(road, house, c, co)), option);
+                                    break;
+
+                                case "quit":
+                                    ok = 1;
+                                    break;
+
+                                default:
+                                    Console.WriteLine("Invalid Command!! Please, Type a Valid Command..");
+                                    Console.WriteLine();
+                                    break;
+                            }
+
+                            if (ok == 1)
+                            {
+                                break;
+                            }
+                        }
+                        break;
+
+                    case "account":
+                        while (true)
+                        {
+                            Console.WriteLine("deposit: Make a Deposit");
+                            Console.WriteLine("withdraw: Make a Withdrawal");
+                            Console.WriteLine("transfer: Make a Transfer");
+                            Console.WriteLine("show: Check The Number of Transactions and Balance");
+                            Console.WriteLine("quit: Exit");
+
+                            Console.Write("Please, Type to Select an Operation: ");
+                            string choose = Console.ReadLine().ToLower();
+                            Console.WriteLine();
+
+                            
+                            if (choose == "deposit")
+                            {
+
+                                Console.Write("Enter Account Number: ");
+                                int id = Convert.ToInt32(Console.ReadLine());
+
+                                Console.Write("Enter Deposit Amount: ");
+                                double amount = Convert.ToDouble(Console.ReadLine());
+
+                                b.Transaction(choose, id, amount);
+                            }
+
+                            else if (choose == "withdraw")
+                            {
+                                Console.Write("Enter Account Number: ");
+                                int id = Convert.ToInt32(Console.ReadLine());
+
+                                Console.Write("Enter Withdraw Amount: ");
+                                double amount = Convert.ToDouble(Console.ReadLine());
+
+                                b.Transaction(choose, id, amount);
+                            }
+
+                            else if (choose == "transfer")
+                            {
+                                Console.Write("Enter Transfer Amount: ");
+                                double amount = Convert.ToDouble(Console.ReadLine());
+
+                                Console.Write("Enter Receiver Account Number: ");
+                                int id2 = Convert.ToInt32(Console.ReadLine());
+
+                                b.Transaction(choose, id, id2, amount);
+                            }
+
+                            else if (choose == "show")
+                            {
+                                Console.Write("Please Enter Account Number: ");
+                                int id = Convert.ToInt32(Console.ReadLine());
+
+                                b.AccountInformation(id);
+                                Console.WriteLine();
+                            }
+
+                            else if (choose == "quit")
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid Command!! Please, Type a Valid Command..");
+                                Console.WriteLine();
+                            }
+                        }
+                        break;
+
+                    case "quit":
+                        check = 1;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid Command!! Please, Type a Valid Command..");
+                        Console.WriteLine();
+                        break;
                 }
-                catch(Exception e)
+                if (check == 1)
                 {
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine("Please enter a valid number");
-                    menu = true;
-                    Console.ReadLine();
+                    break;
                 }
-                
-              
+
             }
         }
     }

@@ -23,13 +23,13 @@ namespace BankingSystem
                 get{return this.myBank;}
             }
 
-        public Bank()
+        public Bank(string bankName)
             {
                 this.bankName= bankName;
                 this.myBank=new Account[100];
             }
 
-        public void AddAccount(Account account)
+        public void AddAccount(Account account, string accountType)
             {
             /*
             Console.WriteLine("Enter the Name of the account holder: ");

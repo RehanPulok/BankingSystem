@@ -77,7 +77,7 @@ namespace BankingSystem
 
         }
         //public abstract void Withdraw(double amount);
-        
+        /*
         public abstract void Withdraw(double amount)
         {
            
@@ -95,23 +95,7 @@ namespace BankingSystem
 
         }
         
-        public void Deposit(double amount)
-        {
-
-            if (amount > 0)
-            {
-                this.balance = this.balance + amount;
-                Console.WriteLine("You deposited {0} Tk", amount);
-                Console.WriteLine("Your current balance : ", this.balance);
-                this.accountTransactions++;
-
-            }
-            else
-            {
-                Console.WriteLine("Deposit Unsuccessful");
-            }    
-
-        }
+        
         public abstract void Transfer(Account receiver, double amount)
         {
             if(amount<=balance)
@@ -137,5 +121,26 @@ namespace BankingSystem
             Console.WriteLine(" Account Name:{0} \n Account Number: {1} \n Ballance: {2} ",accountName,accountNumber, balance);
             this.address.GetAddress();
         }
+        */
+        public void Deposit(double amount)
+        {
+
+            if (amount > 0)
+            {
+                this.balance = this.balance + amount;
+                Console.WriteLine("You deposited {0} Tk", amount);
+                Console.WriteLine("Your current balance : ", this.balance);
+                this.accountTransactions++;
+
+            }
+            else
+            {
+                Console.WriteLine("Deposit Unsuccessful");
+            }
+
+        }
+        public abstract void Withdraw(double amount);
+        public abstract void Transfer(Account receiver, double amount);
+        public abstract void ShowInformation();
     }
 }
