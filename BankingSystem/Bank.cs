@@ -95,6 +95,7 @@ namespace BankingSystem
               */
         
         }
+        /*
         public void DeleteAccount(int accountNumber)
         {
             for(int i=0; i<myBank.Length; i++)
@@ -113,77 +114,69 @@ namespace BankingSystem
             }
 
         }
-        public void Transaction(int accountNumber, int choosenOption)
+        */
+        public void Transaction(string transactionType, int accountNumber, params dynamic[] arr)
         {
-            
-            if (choosenOption == 2)
+            //int c = 0;
+            /*Console.WriteLine("1. Withdraw");
+            Console.WriteLine("2. Deposit");
+            Console.WriteLine("3. Transfer");
+            Console.WriteLine("4. Exit");
+            Console.Write("Enter An Option: ");
+
+            transactionType = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();*/
+
+            int index = -1;
+
+            for (int i = 0; i < myBank.Length; i++)
+            {
+                if (myBank[i] != null)
+                {
+                    if (myBank[i].AccountNumber == accountNumber)
                     {
+                        index = i;
                         
-                        Console.WriteLine("Enter the amount you want to withdraw: ");
-                        double withdrawMoney= double.Parse(Console.ReadLine());
-               
-                        for (int i =0;i<myBank.Length;i++)
+                        break;
+                    }
+                }
+            }
+
+            if (index == -1)
+            {
+                Console.WriteLine("Invalid Account.");
+            }
+            else
+            {
+                if (transactionType == "deposit")
+                {
+                    myBank[index].Deposit(arr[0]);
+                }
+
+                else if (transactionType == "withdraw")
+                {
+                    myBank[index].Withdraw(arr[0]);
+
+                }
+                else if (transactionType == "transfer")
+                {
+                    int receiver = -1;
+                    for (int j = 0; j < myBank.Length; j++)
+                    {
+                        if (myBank[j] != null)
+                        {
+                            if (myBank[j].AccountNumber == arr[0])
                             {
-                            if (myBank[i].AccountNumber==accountNumber)
-                            {
-                                myBank[i].Withdraw(withdrawMoney);
+                                receiver = j;
+                                /*myBank[i] = null;
+                                Check = 1;*/
                                 break;
                             }
-                            else
-                            {
-                                Console.WriteLine("Invalid Account Number.");
-                            }
-
                         }
-                        
-
                     }
-            if (choosenOption == 3)
-                    {
-                        //Console.Write("Enter your account number: ");
-                        //int userAccountNumber = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Enter the amount you want to deposit: ");
-                        double depositMoney= double.Parse(Console.ReadLine());
-                        for (int i =0;i<myBank.Length;i++)
-                             {
-                                  if (myBank[i].AccountNumber==accountNumber)
-                                        {
-                                            myBank[i].Deposit(depositMoney);
-                                            break;
-                                        }
-                                  else
-                                        {
-                                            Console.WriteLine("Invalid Account Number.");
-                                        }
-
-                             }
-                        
+                    myBank[index].Transfer(myBank[receiver], arr[1]);
                 }
-            
-            if (choosenOption == 1)
-                    {
-                        Console.WriteLine("Enter the account number you want to transfer credit: ");
-                        int transferedAccount= int.Parse(Console.ReadLine());
-                        Console.WriteLine("Enter the amount you want to transfer: ");
-                        double amount= double.Parse(Console.ReadLine());
-                        for (int i =0;i<myBank.Length;i++)
-                             {
-                                  if (myBank[i].AccountNumber==accountNumber)
-                                        {
-                                            myBank[i].Transfer(myBank[i],amount);
-                                            break;
-                                        }
-                                  else
-                                        {
-                                            Console.WriteLine("Invalid Account Number.");
-                                        }
-
-                             }
-
-
-                }
-
-
+            }
         }
         public void AccountInformation(int accountNumber)
         {

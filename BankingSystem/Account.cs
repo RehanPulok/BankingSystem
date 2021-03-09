@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace BankingSystem
 {
-    class Account
+    abstract class Account
     {
         protected int accountNumber;
         private string accountName;
+        private string dateofBirth;
         private double balance;
+        protected int accountTransactions;
         private Address address;
         //public int idobject;
         //public int id = 1000;
@@ -30,6 +32,16 @@ namespace BankingSystem
             get { return this.accountName; }
             set { this.accountName = value; }
         }
+        public int AccountTransactions
+        {
+            set { this.accountTransactions = value; }
+            get { return this.accountTransactions; }
+        }
+        public string DateOfBirth
+        {
+            set { this.dateofBirth = value; }
+            get { return this.dateofBirth; }
+        }
         public double Balance 
         {
 
@@ -45,7 +57,7 @@ namespace BankingSystem
             {
         }
       
-        public Account(string accountName, double balance, int accountNumber, Address adress)
+        public Account(string accountName, double balance, int accountNumber,string dateofBirth,  Address adress)
         {
             //IdGenerator id = new IdGenerator();
             
@@ -57,15 +69,19 @@ namespace BankingSystem
             //idobject+=1;
             //AccountNumber= AccountNumber +idobject ;
             this.accountNumber= accountNumber ;
+            this.dateofBirth = dateofBirth;
+            //this.accountTransactions = accountTransactions;
             this.address=adress
             ;
          
 
         }
-        public void Withdraw(double amount)
+        //public abstract void Withdraw(double amount);
+        
+        public abstract void Withdraw(double amount)
         {
            
-            if(balance>=amount)
+            if(amount>0 && balance>=amount)
                 {
                 this.balance= this.balance-amount;
                 Console.WriteLine("You have withdrawn {0} TK", amount);
@@ -78,14 +94,25 @@ namespace BankingSystem
             
 
         }
+        
         public void Deposit(double amount)
         {
-                   
-            this.balance= this.balance+ amount;
-            Console.WriteLine("You deposited {0} Tk",amount);
-            //Console.WriteLine("Your current balance : ",this.balance);
+
+            if (amount > 0)
+            {
+                this.balance = this.balance + amount;
+                Console.WriteLine("You deposited {0} Tk", amount);
+                Console.WriteLine("Your current balance : ", this.balance);
+                this.accountTransactions++;
+
+            }
+            else
+            {
+                Console.WriteLine("Deposit Unsuccessful");
+            }    
+
         }
-        public void Transfer(Account receiver, double amount)
+        public abstract void Transfer(Account receiver, double amount)
         {
             if(amount<=balance)
             {
@@ -105,7 +132,7 @@ namespace BankingSystem
         }
     
 	
-        public void ShowInformation()
+        public abstract void ShowInformation()
         {
             Console.WriteLine(" Account Name:{0} \n Account Number: {1} \n Ballance: {2} ",accountName,accountNumber, balance);
             this.address.GetAddress();
